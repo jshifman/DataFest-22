@@ -1,5 +1,5 @@
 library(tidyverse)
-log.files <- read_csv("data/DataFest2022/data files/logs.csv", guess_max = 2106600, col_select = c(date, total_points, event_id, player_id))
+log.files <- read_csv("data/DataFest2022/data files/logs.csv", guess_max = 2106600, col_select = c(date, total_points, event_id, player_id, minigame_level))
 
 people_data <- log.files
 people_data$date <- as.Date.character(people_data$date)
@@ -9,6 +9,13 @@ people_data <- people_data %>%
   group_by(player_id) %>%
   mutate(initial_date = min(date),time_since_initial = as.numeric(date - initial_date)/7)
   
+max_level_d <- people_data %>%
+  filter(event_id == 911) %>% 
+  group_by(player_id) %>%
+  summarise(max_level = max(minigame_level))
+
+nrow(filter(max_level_d, max_level %in% c(8,9)))/nrow(max_level_d)
+
 total_bad <- people_data %>%
   group_by(minigame_level, player_id) %>%
   summarise(total_bad_dec = sum(missed_safe_invitations + accepted_unsafe_invitations, na.rm = TRUE))
@@ -48,4 +55,6 @@ people_data <- filter(people_data, event_id == 911)
 ggplot() +
   geom_point(data = people_data, aes(x = time_since_initial, y = total_points)) +
   geom_smooth(data = people_data, aes(x = time_since_initial, y = total_points)) +
-  ylim(c(0, 50))
+  ylim(c(0, 50)) +
+  xlab("Weeks Since the Start") +
+  ylab("Total Points on Friends Minigame")
