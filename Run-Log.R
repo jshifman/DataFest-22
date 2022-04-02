@@ -1,4 +1,4 @@
-#log.files <- read.csv("/home/jonnym/Desktop/DataFest/data files/logs.csv",nrows=100000)
+log.files <- read_csv("/home/jonnym/Desktop/DataFest/data files/logs.csv", guess_max = 2106600)
 
 
 people_data$date <- as.Date.character(people_data$date)
