@@ -20,18 +20,27 @@ surv <- group_by(survey_data, player_id) %>%
 
 player_summary <- left_join(player_summary, surv)
 
-player_summary$max_weeks <- factor(player_summary$max_weeks,
-                                   levels = c("S5_mean.0", "S5_mean3",
-                                              "S5_mean.6", "S5_mean.12", "S5_mean.24"))
-player_summary$player_id <- factor(player_summary$player_id)
+# player_summary$max_weeks <- factor(player_summary$max_weeks, levels = c("S5_mean.0", "S5_mean3", "S5_mean.6", "S5_mean.12", "S5_mean.24"))
+
 max_weeks <- player_summary$max_weeks
+col_num <- function(x){
+  if (x == 0)
+    return(2)
+  if (x == 3)
+    return(3)
+  if (x == 6)
+    return(4)
+  if (x == 12)
+    return(5)
+  if (x == 24)
+    return(6)
+}
 max_week_value <- c()
 for (i in 1:nrow(player_summary)) {
-  max_week_value[i] = player_summary[i, as.character(max_weeks[i])]
+  max_week_value[i] = player_summary[i, col_num(max_weeks[i])]
 }
-player_summary$max_week_value <- as.numeric(player_summary$max_week_value)
-player_summary <- mutate(player_summary, perc_diff = (max_week_value-S5_mean.0))
-
-player_summary$max_weeks <- factor(player_summary$max_weeks, labels = c(0,3,6,12,24))
+player_summary$max_week_value <- max_week_value
+player_summary <- mutate(player_summary, perc_diff = (max_week_value-S5_mean.0)/S5_mean.0)
+player_summary <- filter(player_summary, player_id != 6486018)
 
 boxplot(perc_diff~max_weeks, player_summary)
