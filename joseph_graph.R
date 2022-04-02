@@ -20,8 +20,6 @@ surv <- group_by(survey_data, player_id) %>%
 
 player_summary <- left_join(player_summary, surv)
 
-# player_summary$max_weeks <- factor(player_summary$max_weeks, levels = c("S5_mean.0", "S5_mean3", "S5_mean.6", "S5_mean.12", "S5_mean.24"))
-
 max_weeks <- player_summary$max_weeks
 col_num <- function(x){
   if (x == 0)
@@ -46,3 +44,6 @@ player_summary <- filter(player_summary, player_id != 6486018)
 boxplot(perc_diff~max_weeks, player_summary)
 
 write.csv(player_summary, file = "player_survey_summary.csv")
+
+
+
