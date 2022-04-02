@@ -44,3 +44,5 @@ player_summary <- mutate(player_summary, perc_diff = (max_week_value-S5_mean.0)/
 player_summary <- filter(player_summary, player_id != 6486018)
 
 boxplot(perc_diff~max_weeks, player_summary)
+
+write.csv(player_summary, file = "player_survey_summary.csv")
