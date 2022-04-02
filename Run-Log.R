@@ -10,10 +10,12 @@ people_data <- people_data %>%
   mutate(initial_date = min(.$date),time_since_initial = date - initial_date)
   
 total_bad <- people_data %>%
-  group_by(minigame_level) %>%
-  summarise(total_bad_dec = mean(missed_safe_invitations + accepted_unsafe_invitations,na.rm=T))
+  group_by(minigame_level, player_id) %>%
+  summarise(total_bad_dec = missed_safe_invitations + accepted_unsafe_invitations)
 
-people_data$total_bad_dec <- people_data$missed_safe_invitations + people_data$accepted_unsafe_invitations
+avg_t_bad <- total_bad %>%
+  group_by(minigame_level) %>%
+  summarise(avg_bad = mean(total_bad_dec,na.rm=T))
 
 three_strikes <- people_data %>%
   group_by(minigame_level) %>%
