@@ -4,8 +4,8 @@ library(ggplot2)
 survey_data <- read.csv("../data files/S5_scores_cleaned.csv")
 survey_wide <- reshape(survey_data,idvar="player_id",timevar="weeks",direction = "wide")
 
-
-player_data <- read.csv("/home/jonnym/Desktop/DataFest/data files/player-6427031 .csv")
+player_data <- read.csv("/home/jonnym/Desktop/DataFest/data files/player-6486029.csv")
+#player_data <- log.files
 people_data <- player_data[player_data$event_id %in% c(900:912),]
 keep_col <- c("row_id"    ,"player_id"        ,"school",                    
               "wave"      ,"session"          ,"date",                           
@@ -43,11 +43,16 @@ priority_data$priority_type_2 <- factor(priority_data$priority_type_2,labels = c
 
 
 
-player_data_keep <- left_join(people_data,priority_data)#,by="player_id")
-player_data_keep <- left_join(player_data_keep,refusal_data)#,by="player_id")
-player_data_keep <- left_join(player_data_keep,general_data)#,by="player_id")
-player_data_keep <- left_join(player_data_keep,survey_wide)
+player_data_keep <- bind_rows(people_data,priority_data)
+player_data_keep <- bind_rows(player_data_keep,refusal_data)#,by="player_id")
+player_data_keep <- bind_rows(player_data_keep,general_data)#,by="player_id")
+player_data_keep <- bind_rows(player_data_keep,survey_wide)#,by="player_id")
+
+write.csv(people_data,"People-Mini-Game-Data-Player-6427031.csv")
+
+ext_data <- read.csv("/home/jonnym/Desktop/DataFest/DataFest-22/Mini-Game-Extra.csv")
+player_data_keep <- bind_rows(player_data_keep,ext_data)
 
 
-ggplot(priority_data,aes(x=priority_type_2,y=count)) +
-  geom_point()
+ggplot(subset(player_data_keep, !is.na(priority_type_2)),aes(x=priority_type_2)) +
+  geom_bar(stat="count")

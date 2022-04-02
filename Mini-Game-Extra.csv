@@ -1,0 +1,8 @@
+row_id,player_id,school,wave,session,date,event_id,event_description,event_category,event_time,event_time_dbl,minigame_level,players_cred_total,validity
+309059,6427031,3561,3561 YES! Program Fall 2013,Session 1,2013-10-23,420,End of level,Knowledge Minigame,41M 59S,2519,0.0,30.0,
+309203,6427031,3561,3561 YES! Program Fall 2013,Session 1,2013-10-23,420,End of level,Knowledge Minigame,51M 11S,3071,0.0,38.0,
+309361,6427031,3561,3561 YES! Program Fall 2013,Session 1,2013-10-23,420,End of level,Knowledge Minigame,56M 21S,3381,0.0,40.0,
+309473,6427031,3561,3561 YES! Program Fall 2013,Session 1,2013-10-23,420,End of level,Knowledge Minigame,1H 2M 25S,3745,0.0,48.0,
+309719,6427031,3561,3561 YES! Program Fall 2013,Session 2,2013-10-28,420,End of level,Knowledge Minigame,1H 13M 28S,4408,0.0,56.0,
+309914,6427031,3561,3561 YES! Program Fall 2013,Session 2,2013-10-28,420,End of level,Knowledge Minigame,1H 22M 49S,4969,0.0,64.0,
+
