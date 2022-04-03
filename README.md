@@ -1,3 +1,3 @@
 # DataFest-22
 
-https://docs.google.com/presentation/d/1NcnGTCXfoqYY_ZpG4t3jQbf_Gk1X84hFwjFzTplDxNQ/edit?usp=sharing
+![alt text](https://github.com/jshifman/DataFest-22/blob/main/DataFest-22.pdf)
