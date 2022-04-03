@@ -51,8 +51,8 @@ library(ggthemes)
 ggplot() +
   theme_hc() +
   geom_col(data = three_strikes, aes(x = minigame_level, y = total), fill = "blue", alpha = .3) +
-  geom_line(data = avg_t_bad, aes(x = minigame_level, y = avg_bad*3, group = avatar_age, color = avatar_age)) +
-  geom_point(data = avg_t_bad, aes(x = minigame_level, y = avg_bad*3, group = avatar_age, color = avatar_age)) +
+  geom_line(data = avg_t_bad, aes(x = minigame_level, y = avg_bad*3, group = avatar_age, color = avatar_age), size = 1) +
+  geom_point(data = avg_t_bad, aes(x = minigame_level, y = avg_bad*3, group = avatar_age, color = avatar_age), size = 2) +
   scale_y_continuous("Total Minigame Losses (Bar)", sec.axis = sec_axis(~./3, name = "Average Total Bad Decisions Made (Line)")) +
   xlab("Minigame Level") +
   ggtitle("Aggregate Totals from Friends Minigame") +
