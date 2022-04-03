@@ -66,10 +66,43 @@ survey_data <- left_join(survey_data, player_demos, by = "player_id")
 write.csv(survey_data, file = "survey_with_demo.csv")
 write.csv(people_data, file = "people.csv")
 
-
-ggplot() +
+library(gridExtra)
+p1 <- ggplot() +
+  theme_hc() +
   geom_point(data = filter(people_data, avatar_gender == "Male"), aes(x = time_since_initial, y = total_points)) +
-  geom_smooth(data = filter(survey_data, avatar_gender == "Male"), aes(x = weeks, y = S5_mean*10)) +
-  geom_point(data = filter(survey_data, avatar_gender == "Male"), aes(x = weeks, y = S5_mean*10), color = "blue", size = 2, alpha = .5) +
+  geom_smooth(data = filter(people_data, avatar_gender == "Male"), aes(x = time_since_initial, y = total_points), se = F) +
+  ylim(c(-60,60)) +
   xlab("Weeks Since Starting the Game") +
-  scale_y_continuous("Total Points on Friends Minigame", sec.axis = sec_axis(~./10, name = "Survey Score"))
+  ylab("Total Points on Friends Minigame") +
+  ggtitle("Male Players")
+
+p2 <- ggplot() +
+  theme_hc() +
+  geom_smooth(data = filter(survey_data, avatar_gender == "Male"), aes(x = weeks, y = S5_mean), se = F) +
+  geom_point(data = filter(survey_data, avatar_gender == "Male"), aes(x = weeks, y = S5_mean), color = "blue") +
+  ylim(c(3,4)) +
+  ylab("Survey Score") +
+  xlab("Weeks Since Starting the Game") +
+  ggtitle("Male Players Survey Scores")
+
+p3 <- ggplot() +
+  theme_hc() +
+  geom_point(data = filter(people_data, avatar_gender == "Female"), aes(x = time_since_initial, y = total_points)) +
+  geom_smooth(data = filter(people_data, avatar_gender == "Female"), aes(x = time_since_initial, y = total_points), se = F, color = "red") +
+  ylim(c(-60,60)) +
+  xlab("Weeks Since Starting the Game") +
+  ylab("Total Points on Friends Minigame") +
+  ggtitle("Female Players")
+
+p4 <- ggplot() +
+  theme_hc() +
+  geom_smooth(data = filter(survey_data, avatar_gender == "Female"), aes(x = weeks, y = S5_mean), color = "red", se = F) +
+  geom_point(data = filter(survey_data, avatar_gender == "Female"), aes(x = weeks, y = S5_mean), color = "red") +
+  ylim(c(3,4)) +
+  ylab("Survey Score") +
+  xlab("Weeks Since Starting the Game") +
+  ggtitle("Female Players Survey Scores")
+
+grid.arrange(p1, p2, p3, p4)
+
+
