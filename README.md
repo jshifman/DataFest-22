@@ -17,7 +17,7 @@ Data: The primary data set consists of player logs for 166 players. The players 
 
 ### Award For Best Visualization
 
-![fit](https://github.com/jshifman/DataFest-22/blob/main/DataFest-22-graph.png?raw=true)
+![fit](https://github.com/jshifman/DataFest-22/blob/main/DataFest-22-slide1.png?raw=true)
 
 
-![fi](https://github.com/jshifman/DataFest-22/blob/main/DataFest-22.png?raw=true)
+![fi](https://github.com/jshifman/DataFest-22/blob/main/DataFest-22-slide2.png?raw=true)
